@@ -4,10 +4,16 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController2D))]
 public class Player : MonoBehaviour {
+	
+	[SerializeField] private ParticleSystem deathEffect;
 
+	private Rigidbody2D rigidBody;
+	private SpriteRenderer sprite;
 	private CharacterController2D controller;
 
 	void Awake() {
+		rigidBody = GetComponent<Rigidbody2D>();
+		sprite = GetComponent<SpriteRenderer>();
 		controller = GetComponent<CharacterController2D>();
 	}
 
@@ -24,7 +30,8 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Die() {
-		Debug.Log("I'm DEAD");
+		var effect = Instantiate(deathEffect, transform.position, Quaternion.Euler(0, -90, 0));
+		effect.Play();
 		gameObject.SetActive(false);
 	}
 }

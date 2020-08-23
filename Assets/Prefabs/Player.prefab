@@ -104,8 +104,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -524107401
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -129996690959384901, guid: fdb1007049f3c0448b0ea57e91d60cdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,7 +175,9 @@ MonoBehaviour:
   ceilingCheck: {fileID: 1869731783955653392}
   horizontalSpeed: 10
   inAirSpeedScale: 0.8
-  jumpForce: 400
+  jumpForce: 800
+  jumpingGravityScale: 3
+  gravityScale: 4
 --- !u!114 &3630529353668951862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10242bb61b0a927489c56c34eb5a8805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEffect: {fileID: 6117035525600602517, guid: 08848f3a73656154c8f7e0981a274560, type: 3}
 --- !u!1 &7669026011163903516
 GameObject:
   m_ObjectHideFlags: 0

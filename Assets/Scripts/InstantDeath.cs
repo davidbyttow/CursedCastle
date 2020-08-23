@@ -6,17 +6,17 @@ public class InstantDeath : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision) {
 		var other = collision.collider;
-		Debug.Log($"Collided: {other}, {other.gameObject}");
-		if (other.TryGetComponent(out Player player)) {
-			player.Die();
-		}
+		CheckCollision(other);
 	}
 
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log($"Touched: {other}, {other.gameObject}");
+		CheckCollision(other);
+	}
+
+	void CheckCollision(Collider2D other) {
 		if (other.TryGetComponent(out Player player)) {
 			player.Die();
-		}	
+		}
 	}
 }

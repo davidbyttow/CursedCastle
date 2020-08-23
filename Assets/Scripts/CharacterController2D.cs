@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CharacterController2D : MonoBehaviour {
 
 	private const float groundCheckRadius = 0.2f;
@@ -14,23 +15,37 @@ public class CharacterController2D : MonoBehaviour {
 	[SerializeField] private float horizontalSpeed = 10f;
 	[SerializeField] private float inAirSpeedScale = 0.8f;
 	[SerializeField] private float jumpForce = 400f;
-
+	[SerializeField] private float jumpingGravityScale = 3f;
+	[SerializeField] private float gravityScale = 4f;
+	
 	private Rigidbody2D rigidBody;
+	private CapsuleCollider2D capsule;
 
 	private Vector3 velocity = Vector3.zero;
 	private bool isGrounded;
 
 	void Awake() {
 		rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody.gravityScale = gravityScale;
+		rigidBody.isKinematic = false;
+		rigidBody.freezeRotation = true;
+
+		capsule = GetComponent<CapsuleCollider2D>();
 	}
 
 	void FixedUpdate() {
 		CheckGround();
+
+		if (!isGrounded && rigidBody.velocity.y < 0) {
+			rigidBody.gravityScale = gravityScale;
+		}
 	}
 
 	private void CheckGround() {
 		bool wasGrounded = isGrounded;
 		isGrounded = false;
+
+		// TODO: Sphere cast or something
 
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundMask);
 		foreach (Collider2D collider in colliders) {
@@ -51,6 +66,7 @@ public class CharacterController2D : MonoBehaviour {
 		if (isGrounded) {
 			isGrounded = false;
 			rigidBody.AddForce(new Vector2(0, jumpForce));
+			rigidBody.gravityScale = jumpingGravityScale;
 		}
 	}
 
