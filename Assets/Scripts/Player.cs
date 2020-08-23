@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 	private SpriteRenderer sprite;
 	private CharacterController2D controller;
 	public bool dead = false;
+	public bool jumping = false;
 
 	void Awake() {
 		rigidBody = GetComponent<Rigidbody2D>();
@@ -21,7 +22,12 @@ public class Player : MonoBehaviour {
 	void Update() {
 		bool jump = Input.GetButtonDown("Jump");
 		if (jump) {
+			jumping = true;
 			controller.Jump();
+		}
+		if (Input.GetButtonUp("Jump")) {
+			jumping = false;
+			controller.CancelJump();
 		}
 	}
 

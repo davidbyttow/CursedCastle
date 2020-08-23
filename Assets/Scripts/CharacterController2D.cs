@@ -87,6 +87,14 @@ public class CharacterController2D : MonoBehaviour {
 		}
 	}
 
+	public void CancelJump() {
+		if (!isGrounded) {
+			rigidBody.gravityScale = gravityScale;
+			var damping = rigidBody.velocity.y > 0 ? 0.5f : 1f;
+			rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * damping);
+		}
+	}
+
 	void OnDrawGizmosSelected() {
 		if (groundCheck) {
 			Gizmos.color = Color.yellow;
