@@ -113,7 +113,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   once: 0
-  waitTime: 0.5
+  waitTime: 0.15
 --- !u!114 &2677746923612349758
 MonoBehaviour:
   m_ObjectHideFlags: 0

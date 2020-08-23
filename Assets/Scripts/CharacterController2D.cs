@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class CharacterController2D : MonoBehaviour {
 
 	private const float groundCheckRadius = 0.2f;
@@ -17,7 +16,8 @@ public class CharacterController2D : MonoBehaviour {
 	[SerializeField] private float jumpForce = 400f;
 	[SerializeField] private float jumpingGravityScale = 3f;
 	[SerializeField] private float gravityScale = 4f;
-	
+
+	private float inAirStartTime = 0;
 	private Rigidbody2D rigidBody;
 	private CapsuleCollider2D capsule;
 
@@ -31,6 +31,10 @@ public class CharacterController2D : MonoBehaviour {
 		rigidBody.freezeRotation = true;
 
 		capsule = GetComponent<CapsuleCollider2D>();
+	}
+
+	void Start() {
+		inAirStartTime = Time.time;
 	}
 
 	void FixedUpdate() {
@@ -54,6 +58,17 @@ public class CharacterController2D : MonoBehaviour {
 				break;
 			}
 		}
+
+		if (wasGrounded && !isGrounded) {
+			inAirStartTime = Time.time;
+		}
+
+		if (isGrounded && !wasGrounded) {
+			if (Time.time - inAirStartTime > 0.2f) {
+				// Re-using the jump sound
+				SoundManager.inst.PlayJump();
+			}
+		}
 	}
 
 	public void Move(float horizontalInput) {
@@ -64,9 +79,11 @@ public class CharacterController2D : MonoBehaviour {
 
 	public void Jump() {
 		if (isGrounded) {
+			SoundManager.inst.PlayJump();
 			isGrounded = false;
 			rigidBody.AddForce(new Vector2(0, jumpForce));
 			rigidBody.gravityScale = jumpingGravityScale;
+			inAirStartTime = Time.time;
 		}
 	}
 

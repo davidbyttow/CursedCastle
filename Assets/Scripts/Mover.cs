@@ -20,6 +20,9 @@ public class Mover : MonoBehaviour {
 		if (triggered) {
 			return;
 		}
+
+		SoundManager.inst.PlaySwoosh();
+
 		triggered = true;
 		elapsed = 0;
 	}

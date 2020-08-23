@@ -27,6 +27,9 @@ public class Trigger : MonoBehaviour {
 			return;
 		}
 		if (other.TryGetComponent(out Player player)) {
+			if (player.dead) {
+				return;
+			}
 			elapsed = 0;
 			inTrigger = true;
 		}

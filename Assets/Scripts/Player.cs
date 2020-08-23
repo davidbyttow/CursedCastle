@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rigidBody;
 	private SpriteRenderer sprite;
 	private CharacterController2D controller;
+	public bool dead = false;
 
 	void Awake() {
 		rigidBody = GetComponent<Rigidbody2D>();
@@ -30,6 +31,14 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Die() {
+		if (dead) {
+			return;
+		}
+		if (Camera.main.TryGetComponent(out CameraShake shake)) {
+			shake.Shake();
+		}
+		dead = true;
+		SoundManager.inst.PlayDeath();
 		var effect = Instantiate(deathEffect, transform.position, Quaternion.Euler(0, -90, 0));
 		effect.Play();
 		gameObject.SetActive(false);
