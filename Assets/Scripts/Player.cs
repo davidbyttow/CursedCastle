@@ -19,6 +19,10 @@ public class Player : MonoBehaviour {
 		controller = GetComponent<CharacterController2D>();
 	}
 
+	void Start() {
+		SoundManager.inst.PlayDoorClose();
+	}
+
 	void Update() {
 		bool jump = Input.GetButtonDown("Jump");
 		if (jump) {

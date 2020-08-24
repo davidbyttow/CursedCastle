@@ -152,3 +152,6 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: 8947890efaaedfc49aa0651478118047, type: 3}
   - {fileID: 8300000, guid: 2f9da84746b80b64c9c88a33298f30f7, type: 3}
+  doorCloseSounds:
+  - {fileID: 8300000, guid: 1dec70db2a028764fa9a4390ffa70439, type: 3}
+  - {fileID: 8300000, guid: 2a305ca18f1de8e449eb15482ddbcf4e, type: 3}

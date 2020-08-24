@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip[] landSounds;
 	public AudioClip[] swooshSounds;
 	public AudioClip[] deathSounds;
+	public AudioClip[] doorCloseSounds;
 
 	private AudioSource source;
 
@@ -38,6 +39,10 @@ public class SoundManager : MonoBehaviour {
 
 	public void PlayDeath() {
 		source.PlayOneShot(Pick(deathSounds));
+	}
+
+	public void PlayDoorClose() {
+		source.PlayOneShot(Pick(doorCloseSounds));
 	}
 
 	public AudioClip Pick(AudioClip[] clips) {
