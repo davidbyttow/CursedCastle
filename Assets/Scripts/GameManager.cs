@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager global { get; private set; }
 
 	[SerializeField] private AudioClip music;
+	private float restartDelay = 0;
 
 	void Awake() {
 		if (global!= null) {
@@ -26,11 +27,25 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update() {
+		if (restartDelay > 0) {
+			restartDelay -= Time.deltaTime;
+			if (restartDelay <= 0) {
+				Restart();
+			}
+		}
 		if (Input.GetKeyDown(KeyCode.Tab)) {
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			Restart();
 		}
 	}
-	
+
+	public void QueueRestart() {
+		restartDelay = 1.5f;
+	}
+
+	private void Restart() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
 	public void ExitLevel() {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}

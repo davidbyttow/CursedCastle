@@ -48,5 +48,6 @@ public class Player : MonoBehaviour {
 		var effect = Instantiate(deathEffect, transform.position, Quaternion.Euler(0, -90, 0));
 		effect.Play();
 		gameObject.SetActive(false);
+		GameManager.global.QueueRestart();
 	}
 }

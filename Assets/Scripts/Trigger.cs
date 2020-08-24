@@ -7,6 +7,7 @@ public class Trigger : MonoBehaviour {
 	[SerializeField] private UnityEvent onTrigger;
 	[SerializeField] private bool once = true;
 	[SerializeField] private float waitTime = 0;
+	[SerializeField] private bool canLeaveTrigger = false;
 
 	private bool triggered = false;
 	private bool inTrigger = false;
@@ -37,7 +38,9 @@ public class Trigger : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.TryGetComponent(out Player player)) {
-			inTrigger = false;
+			if (!canLeaveTrigger) {
+				inTrigger = false;
+			}
 		}
 	}
 }
