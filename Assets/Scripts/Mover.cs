@@ -27,12 +27,12 @@ public class Mover : MonoBehaviour {
 		elapsed = 0;
 	}
 
-	void Update() {
+	void FixedUpdate() {
 		if (!triggered) {
 			return;
 		}
 		if (elapsed < duration) {
-			elapsed += Time.deltaTime;
+			elapsed += Time.fixedDeltaTime;
 			if (elapsed >= duration) {
 				elapsed = duration;
 			}
